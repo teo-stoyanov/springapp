@@ -1,0 +1,14 @@
+CREATE TABLE users (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    address VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE accounts (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    balance DECIMAL(19,2) DEFAULT 0.00,
+    currency VARCHAR(10) NOT NULL,
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
+);
