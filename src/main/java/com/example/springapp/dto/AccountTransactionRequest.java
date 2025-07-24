@@ -14,6 +14,6 @@ public class AccountTransactionRequest {
     private Currency currency;
 
     @NotNull
-    @DecimalMin(value = "5.00", message = "Minimum transaction amount is 5 EUR")
+    @DecimalMin(value = "0.01", message = "Amount must be positive")
     private BigDecimal amount;
 }

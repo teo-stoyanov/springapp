@@ -58,12 +58,18 @@ public class AccountService {
         Currency inputCurrency = request.getCurrency();
         Currency accountCurrency = account.getCurrency();
 
-        if (amount.compareTo(new BigDecimal("5.00")) < 0) {
+        // Currency-specific minimum validation
+        if (inputCurrency == Currency.EURO && amount.compareTo(new BigDecimal("5.00")) < 0) {
             throw new IllegalArgumentException("Minimum deposit is 5 EUR");
+        } else if (inputCurrency == Currency.LEVA && amount.compareTo(new BigDecimal("10.00")) < 0) {
+            throw new IllegalArgumentException("Minimum deposit is 10 LEVA");
         }
 
-        if (amount.compareTo(new BigDecimal("5000.00")) > 0) {
-            throw new IllegalArgumentException("More than 5k should be in bank");
+        // Currency-specific maximum validation
+        if (inputCurrency == Currency.EURO && amount.compareTo(new BigDecimal("5000.00")) > 0) {
+            throw new IllegalArgumentException("Maximum deposit is 5000 EUR - more than this should be in bank");
+        } else if (inputCurrency == Currency.LEVA && amount.compareTo(new BigDecimal("10000.00")) > 0) {
+            throw new IllegalArgumentException("Maximum deposit is 10000 LEVA - more than this should be in bank");
         }
 
         if (inputCurrency != accountCurrency) {
@@ -91,8 +97,11 @@ public class AccountService {
         Currency accountCurrency = account.getCurrency();
         BigDecimal amount = request.getAmount();
 
-        if (amount.compareTo(new BigDecimal("5.00")) < 0) {
+        // Currency-specific minimum validation
+        if (inputCurrency == Currency.EURO && amount.compareTo(new BigDecimal("5.00")) < 0) {
             throw new IllegalArgumentException("Minimum withdrawal is 5 EUR");
+        } else if (inputCurrency == Currency.LEVA && amount.compareTo(new BigDecimal("10.00")) < 0) {
+            throw new IllegalArgumentException("Minimum withdrawal is 10 LEVA");
         }
 
         // Auto conversion if needed

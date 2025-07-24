@@ -25,7 +25,7 @@ public class AccountController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('VIEWER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @Operation(summary = "Create a new account", description = "Creates a new account for the specified user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Account successfully created"),
@@ -41,7 +41,7 @@ public class AccountController {
 
     @PostMapping("/{accountId}/deposit")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('VIEWER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @Operation(summary = "Deposit money", description = "Deposits money into the specified account")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Deposit successful"),
@@ -58,7 +58,7 @@ public class AccountController {
 
     @PostMapping("/{accountId}/withdraw")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasRole('ADMIN') or hasRole('VIEWER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @Operation(summary = "Withdraw money", description = "Withdraws money from the specified account")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Withdrawal successful"),
@@ -74,7 +74,7 @@ public class AccountController {
     }
 
     @GetMapping("/{accountId}/balance")
-    @PreAuthorize("hasRole('ADMIN') or hasRole('VIEWER')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @Operation(summary = "Get account balance", description = "Retrieves the current balance of the specified account")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Balance retrieved successfully"),

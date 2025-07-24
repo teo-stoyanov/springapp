@@ -37,11 +37,11 @@ public class SecurityConfig {
                 .roles("ADMIN")
                 .build();
 
-        UserDetails viewer = User.withUsername("viewer")
-                .password("{noop}viewerpass")
-                .roles("VIEWER")
+        UserDetails user = User.withUsername("user")
+                .password("{noop}userpass")
+                .roles("USER")
                 .build();
 
-        return new InMemoryUserDetailsManager(admin, viewer);
+        return new InMemoryUserDetailsManager(admin, user);
     }
 }
